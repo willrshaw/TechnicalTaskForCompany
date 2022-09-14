@@ -10,10 +10,6 @@ class CityWeather():
         self.name = name
         self.weather = weather # store all weather in this variable to reduce requests
         
-        
-    def __str__(self): # ToString method for printing
-        return self.name
-    
    
     def get_temp(self, day : str, hour : int) -> int: # used for Q1, Q3, Q5
         """get_temp Get temperature in a current city at a certain time and  day.

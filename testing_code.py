@@ -23,6 +23,8 @@ class TestZynstraQuestions(unittest.TestCase):
         fake_city = CityWeather("Middlesfjord", self.temp_median_data)
         self.assertEqual(fake_city.get_temp_median(), 2, "CityWeather.get_temp_median failed")
         
-    
+    def test_get_higest_windspeed(self):
+        fake_city = CityWeather("WindyCity", self.pressure_below_data)
+        self.assertEqual(fake_city.get_highest_wind_speed(), 4, "CityWeather.get_highest_wind_speed failed")
 if __name__ == "__main__":
     unittest.main()
