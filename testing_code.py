@@ -10,6 +10,13 @@ class TestZynstraQuestions(unittest.TestCase):
                            
     temp_median_data = {'monday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":0,"wind_direction":"NE","wind_speed":3}, {"humidity":85,"precipitation":0,"pressure":992,"temperature":1,"wind_direction":"NE","wind_speed":3}, {"humidity":85,"precipitation":0,"pressure":992,"temperature":2,"wind_direction":"NE","wind_speed":3}, {"humidity":85,"precipitation":0,"pressure":992,"temperature":3,"wind_direction":"NE","wind_speed":3}, {"humidity":85,"precipitation":0,"pressure":992,"temperature":4,"wind_direction":"NE","wind_speed":3}]}
     
+    temp_below_week = {'monday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":12,"wind_direction":"NE","wind_speed":3}],
+                       'tuesday': [{"humidity":85,"precipitation":0,"pressure":992,"temperature":14,"wind_direction":"NE","wind_speed":3}],
+                       'wednesday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":13,"wind_direction":"NE","wind_speed":3}],
+                       'thursday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":17,"wind_direction":"NE","wind_speed":3}],
+                       'friday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":15,"wind_direction":"NE","wind_speed":3}],
+                       'saturday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":11,"wind_direction":"NE","wind_speed":3}],
+                       'sunday' : [{"humidity":85,"precipitation":0,"pressure":992,"temperature":9,"wind_direction":"NE","wind_speed":3}]}
     def test_get_temp(self):
         fake_city = CityWeather("TemperatureVille", self.test_temp_data)
         self.assertEqual(fake_city.get_temp('friday', 0), 5, "CityWeather.get_temp retrieves wrong temperature")
@@ -26,5 +33,9 @@ class TestZynstraQuestions(unittest.TestCase):
     def test_get_higest_windspeed(self):
         fake_city = CityWeather("WindyCity", self.pressure_below_data)
         self.assertEqual(fake_city.get_highest_wind_speed(), 4, "CityWeather.get_highest_wind_speed failed")
+        
+    def test_temp_below_all_week(self):
+        fake_city = CityWeather("ColdTown", self.temp_median_data)
+        self.assertTrue(fake_city.temp_below_all_week(10), "CityWeather.temp_below_all_week failed")
 if __name__ == "__main__":
     unittest.main()
